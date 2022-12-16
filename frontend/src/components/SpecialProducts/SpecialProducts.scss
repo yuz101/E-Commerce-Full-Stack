@@ -1,0 +1,22 @@
+.special-products {
+    margin: 100px;
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 50px 0px;
+
+        h1 {
+            flex: 2;
+            text-transform: capitalize;
+        }
+        p {
+            flex:3;
+            color: grey;
+        }
+    }
+    .bottom {
+        display: flex;
+        justify-content: space-between;
+    }
+}

@@ -1,0 +1,19 @@
+.item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background-color: white;
+    gap: 20px;
+
+    img {
+        flex: 1;
+        width: 100px;
+    }
+
+    .item-details {
+        display: flex;
+        flex: 4;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

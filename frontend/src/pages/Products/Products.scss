@@ -1,0 +1,25 @@
+.products {
+    margin: 20px;
+    display: flex;
+    gap: 20px;
+
+    .left {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        position: sticky;
+        height: 100%;
+        top: 50px;
+
+        .filterItem {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: grey;
+        }
+    }
+    .right {
+        display: flex;
+        flex: 4;
+    }
+}
