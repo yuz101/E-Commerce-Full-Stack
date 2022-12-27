@@ -1,39 +1,39 @@
 import React from 'react'
+import axios from 'axios'
 import CartItem from '../CartItem/CartItem'
 import "./Cart.scss"
+import { useSelector } from 'react-redux'
 
 const Cart = () => {
-    const data = [
-        {
-            id: 1,
-            img: "https://img.abercrombie.com/is/image/anf/KIC_155-3081-3098-275_model1?policy=product-large",
-            img2: "https://img.abercrombie.com/is/image/anf/KIC_155-3081-3098-275_model2?policy=product-large",
-            title: 'High Rise Vintage Flare Jean',
-            quantity: 1,
-            price: 12,
-        },
-        {
-            id: 2,
-            img: "https://img.abercrombie.com/is/image/anf/KIC_139-2679-1062-900_model1?policy=product-large",
-            img2: "https://img.abercrombie.com/is/image/anf/KIC_139-2679-1062-900_model2?policy=product-large",
-            title: 'Long-Sleeve Seamless Fabric V-Neck Bodysuit',
-            quantity: 3,
-            price: 17,
-        },
-    ]
+
+    const cart = useSelector(state => state.cart)
+
+    const handleCheckout = async () => {
+        try {
+            const res = await axios.post('http://localhost:8888/api/v1/payment/checkout', {
+                cartItems: cart.products
+            })
+            window.location.href = res.data.url
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <div className='cart'>
             <h3>Shopping Cart</h3>
             <div className='cart-items'>
-                {data.map((item) => (
-                    <CartItem product={item}/>
+                {cart.products.map((item) => (
+                    <CartItem key={item.id} product={item} />
                 ))}
             </div>
             <div className='subtotal'>
                 <h4>Subtotal</h4>
-                <h4>$199</h4>
+                <h4>{cart.totalPrice}</h4>
             </div>
-            <button>Check Out</button>
+            <button onClick= { handleCheckout }>
+                Proceed To Check Out
+            </button>
         </div>
     )
 }

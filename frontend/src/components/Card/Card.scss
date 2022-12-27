@@ -46,10 +46,8 @@
         display: flex;
         gap: 10px;
 
-        p {
-            &:first-child {
-                text-decoration: line-through;
-            }
+        .old-price{
+            text-decoration: line-through;
         }
     }
 }

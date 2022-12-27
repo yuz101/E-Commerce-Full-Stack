@@ -9,17 +9,38 @@
         flex-direction: column;
         position: sticky;
         height: 100%;
-        top: 50px;
+        top: 100px;
 
         .filterItem {
             display: flex;
             flex-direction: column;
             gap: 10px;
             color: grey;
+            cursor: pointer;
         }
     }
     .right {
         display: flex;
         flex: 4;
+        flex-direction: column;
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            h2 {
+                color: black;
+                text-transform: capitalize;
+            }
+
+            select {
+                padding: 20px;
+                width: 250px;
+                border: 1px solid grey;
+                color: grey;
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
-import React from 'react'
+import {useState} from 'react'
 import "./Products.scss"
 import ProductList from '../../components/ProductList/ProductList'
-import { Link } from 'react-router-dom'
+import { useLocation, Link} from 'react-router-dom'
 
 const Products = () => {
   const categoryData = [
@@ -71,23 +71,44 @@ const Products = () => {
     
     },
     ]
+  
+  const loc = useLocation();
+  const cat = loc.pathname.split('/')[2]
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+  
+  const handleFilter = (e) => {
+    const value = e.target.textContent
+    setFilters({
+      [e.target.textContent]: value.toLowerCase()
+    })
+  }
+
+  const handleSort = (e) => {
+    setSort(e.target.value)
+  }
+
   return (
     <div className='products'>
       <div className='left'>
         <div className="filterItem">
           {categoryData.map((category) => (
-            <Link 
-              className='link' 
-              key={category.id} 
-              to={`./products/${category.title}`}
-            >   
-              {category.title}
-            </Link>
+            <span key={category.id} onClick={handleFilter}>{category.title}</span>
           ))}
         </div>
       </div>
       <div className='right'>
-        <ProductList catgory="Women's"/>
+          <div className='top'>
+              <h2> {cat} </h2>
+              <select onChange={(handleSort)}>
+                  <option value="" disabled>Sort By</option>
+                  <option value="feature">Featured</option>
+                  <option value="newest">Newest</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-dsc">Price: High to Low</option>
+              </select>
+          </div>
+            <ProductList cat={cat} filters={filters} sort={sort}/>
       </div>
     </div>
   )

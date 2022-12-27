@@ -7,49 +7,46 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from 'react-router-dom';
 import "./Navbar.scss"
 import Cart from '../Cart/Cart';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const [cartOpen, setCartOpen] = useState(false)
+    const quantity = useSelector(state => state.cart.quantity)
+    
     return (
         <div className='navbar'>
             <div className='wrapper'>
                 <div className='left'>
-                    <div className='item'>
+                    <div className='navbarItem'>
                         <span>USD</span>
                         <KeyboardArrowDownOutlinedIcon/>
                     </div>
-                    <div className='item'>
-                        <Link className="link" to="./products/women">Women</Link>
+                    <div className='navbarItem'>
+                        <Link className="link" to="./products/women's">Women's</Link>
                     </div>
-                    <div className='item'>
-                        <Link className="link" to="./products/man">Man</Link>
+                    <div className='navbarItem'>
+                        <Link className="link" to="./products/men's">Men's</Link>
                     </div>
-                    <div className='item'>
-                        <Link className="link" to="./products/children">Children</Link>
+                    <div className='navbarItem'>
+                        <Link className="link" to="./products/children's">Children's</Link>
                     </div>
                 </div>
                 <div className='center'>
-                    <div className='item'>
+                    <div className='navbarItem'>
                         <Link className="link" to='/'>YUZUSTORE</Link>
                     </div>
                 </div>
                 <div className='right'>
-                    <div className='item'>
-                        <Link className="link" to='/'>Home</Link>
-                    </div>
-                    <div className='item'>
-                        <Link className="link" to='/'>About</Link>
-                    </div>
-                    <div className='item'>
-                        <Link className="link" to='/'>Contact Us</Link>
-                    </div>
                     <div className='icons'>
-                        <SearchOutlinedIcon/>
+                        <div className='search-bar'>
+                            <button><SearchOutlinedIcon/></button>
+                            <input type="text" placeholder='Search'></input>
+                        </div>
                         <PersonOutlineOutlinedIcon/>
                         <FavoriteBorderOutlinedIcon/>
                         <div className='cartIcon'>
                             <ShoppingCartOutlinedIcon onClick={() => setCartOpen(!cartOpen)}/>
-                            <span>0</span>
+                            <span>{quantity}</span>
                         </div>
                     </div>
                 </div>

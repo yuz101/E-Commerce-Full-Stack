@@ -15,7 +15,7 @@ const Categories = () => {
             <div className='row'>
                 <img src="https://www.rollingstone.com/wp-content/uploads/2022/04/ANF_SUMMER_1_2022_GETAWAY_SHOP_GOLF_SHOP_MENS_GROUP2_FILM_2166-e1650567955146.jpg?w=1581&h=1054&crop=1"/>
                 <button>
-                    <Link className='link' to="./products/men">Shop Men's</Link>
+                    <Link className='link' to="./products/men's">Shop Men's</Link>
                 </button>
             </div>
         </div>
@@ -23,7 +23,7 @@ const Categories = () => {
             <div className='row'>
                 <img src="https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"/>
                 <button>
-                    <Link className='link' to="./products/women">Shop Women's</Link>
+                    <Link className='link' to="./products/women's">Shop Women's</Link>
                 </button>
             </div>
         </div>

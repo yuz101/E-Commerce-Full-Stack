@@ -36,8 +36,44 @@
             display: flex;
             gap: 10px;
 
-            p:first-child {
+            .old-price {
                 text-decoration: line-through;
+            }
+        }
+
+        .colors {
+            display: flex;
+            flex-direction: column;
+            .items{
+                display: flex;
+                gap: 10px;
+                span{
+                    font-size: 14px;
+                    font-weight: bold;
+                    height: 45px;
+                    width: 45px;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .sizes {
+            display: flex;
+            flex-direction: column;
+            .items{
+                display: flex;
+                gap: 10px;
+                span{
+                    font-size: 14px;
+                    font-weight: bolder;
+                    height: 45px;
+                    width: 45px;
+                    border-radius: 50%;
+                    background-color: lightgray;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
             }
         }
 

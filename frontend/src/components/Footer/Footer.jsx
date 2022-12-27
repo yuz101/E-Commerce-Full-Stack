@@ -7,9 +7,9 @@ const Footer = () => {
     <div className='footer'>
         <div className='top'>
             {footerLinks.map((footerlink) => (
-              <div key={footerlink.title} className='category'>
+              <div key={footerlink.title} className='column'>
                 <h4>{footerlink.title}</h4>
-                <div className='item'>
+                <div className='footerItem'>
                   {footerlink.links.map((link) => (
                       <div key={link.name}>
                         <span>{link.name}</span>

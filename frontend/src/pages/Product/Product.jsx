@@ -1,57 +1,106 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { useLocation } from 'react-router-dom'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import "./Product.scss"
+import { addProduct } from '../../redux/cartRedux';
+import { useDispatch } from 'react-redux';
+import { borderColor } from '@mui/system';
 
 const Product = () => {
+  
+  const loc = useLocation();
+  const id = loc.pathname.split('/')[2]
+  const [product, setProduct] = useState({})
+  const [selectedQuantity, setSelectedQuantity] = useState(1)
+  const [selectedSize, setSelectedSize] = useState("")
+  const [selectedColor, setSelectedColor] = useState("")
   const [selectedImg, setSelectedImg] = useState(0)
+  const dispatch = useDispatch()
 
-  const images = [
-    "https://img.abercrombie.com/is/image/anf/KIC_139-2679-1062-900_model1?policy=product-large",
-    "https://img.abercrombie.com/is/image/anf/KIC_139-2679-1062-900_prod1?policy=product-large",
-    "https://img.abercrombie.com/is/image/anf/KIC_139-2679-1062-900_model2?policy=product-large",
-    "https://img.abercrombie.com/is/image/anf/KIC_139-2679-1062-900_model3?policy=product-large",
-    "https://img.abercrombie.com/is/image/anf/KIC_139-2679-1062-900_model4?policy=product-large",
-    "https://img.abercrombie.com/is/image/anf/KIC_139-2679-1062-900_model5?policy=product-large",
-  ]
+  useEffect(() => {
+    const fetchProductData = async () => {
+        try {
+            const res = await axios.get(`http://localhost:8888/api/v1/products/getOne/${id}`)
+            setProduct(res.data)
+        } catch (err) {}
+    }
+    fetchProductData();
+  },[id])
 
+  const handleQuantity = (e) => {
+    const value = parseInt(e.target.value)
+    setSelectedQuantity(value)
+  }
+
+  const handleColor = (item, index) => {
+    setSelectedColor(item)
+  }
+
+  const handleSize = (e) => {
+    const value = e.target.textContent
+    console.log(value)
+    setSelectedSize(value)
+  }
+
+  const handleClick = () => {
+    dispatch( 
+       addProduct({ ...product, selectedQuantity, selectedColor, selectedSize })
+    )
+  }
   return (
     <div className='product'>
         <div className='left'>
           <div className='detail'>
-            <img src={images[0]} onClick={(e) => setSelectedImg(0)}/>
-            <img src={images[1]} onClick={(e) => setSelectedImg(1)}/>
-            <img src={images[2]} onClick={(e) => setSelectedImg(2)}/>
-            <img src={images[3]} onClick={(e) => setSelectedImg(3)}/>
-            <img src={images[4]} onClick={(e) => setSelectedImg(4)}/>
-            <img src={images[5]} onClick={(e) => setSelectedImg(5)}/>
+            {product.img?.map((img, index) => (
+               <img key={index} src={img} onClick={(e) => setSelectedImg(index)}/>
+            ))}
           </div>
           <div className='main'>
-            <img src={images[selectedImg]}/>
+            <img src={product.img ? product.img[selectedImg] : null }/>
           </div>
         </div>
         <div className='right'>
-          <h3>Long-Sleeve Seamless Fabric V-Neck Bodysuit</h3>
+          <h3>{product.title}</h3>
           <div className='price'>
-            <p>$50</p> 
-            <p>$35</p>
+            {product.oldPrice && <p className='old-price'>{product.oldPrice}</p> }
+            <p>${product.price}</p>
           </div>
-          <div className='size'>
-
+          <div className='colors'>
+              <p>Color:</p>
+              <div className='items'>
+                {product.color?.map((item, index) => (
+                    <span key={index} onClick={() => handleColor(item)} style={{backgroundColor: `${item}`, border: selectedColor == item ? '2px solid black': 'none'}}></span>
+                ))}
+              </div>
+          </div>
+          <div className='sizes'>
+              <p>Size: {}</p>
+              <div className='items'>
+                {product.size?.map((item, index) => (
+                    <span key={index} onClick={handleSize} style={{color: selectedSize == item ? 'white': 'black' ,backgroundColor: selectedSize == item ? '#303030': 'lightgrey'}}>{item}</span>
+                ))}
+              </div>
           </div>
           <div className='add-to-bag'>
-            <select>
-              <option value="" disabled selected> QTY</option>
+            <select defaultValue={"QTY"} onChange={handleQuantity}>
+              <option value="QTY" disabled> QTY</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-            <button>Add To Bag</button>
+            <button onClick={handleClick}>Add To Bag</button>
           </div>
           <div className='save-for-later'>
             <FavoriteBorderOutlinedIcon/>
             Save For Later
+          </div>
+          <div className='description'>
+            <p>Description:</p>
+            <p>{product.description}</p>
           </div>
         </div>
     </div>

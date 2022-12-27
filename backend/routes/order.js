@@ -23,7 +23,7 @@ router.get('/stats', verifyTokenAndAdmin, async (request, response) => {
 })
 
 //CREATE
-router.post('/', verifyToken, async (request, response) => {
+router.post('/create', verifyToken, async (request, response) => {
     const order = Order(request.body)
     try {
       const newOrder = await order.save()

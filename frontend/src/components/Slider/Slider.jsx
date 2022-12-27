@@ -6,9 +6,10 @@ import "./Slider.scss"
 const Slider = () => {
     const [currentSlide, setCurrentSlide] = useState(0)
     const data = [
-        "https://images.pexels.com/photos/1549200/pexels-photo-1549200.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        "https://images.pexels.com/photos/949670/pexels-photo-949670.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        "https://images.pexels.com/photos/837140/pexels-photo-837140.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://wwd.com/wp-content/uploads/2022/11/HCO.jpg",
+        "https://www.rollingstone.com/wp-content/uploads/2022/04/ANF_SUMMER_1_2022_GETAWAY_SHOP_GOLF_SHOP_MENS_GROUP2_FILM_2166-e1650567955146.jpg",
+        "https://i.pinimg.com/originals/10/eb/e1/10ebe13acb78f344e66c1fded81ca3da.png",
+        "https://www.modernretail.co/wp-content/uploads/sites/5/2021/12/HCO_2021_Holiday_One_Hero_1-scaled.jpg",
       ];
 
     const prevSlides = () => {setCurrentSlide(currentSlide === 0 ? 2: (prev) => prev - 1)}
@@ -17,8 +18,9 @@ const Slider = () => {
         <div className='slider'>
             <div className='images' style={{transform: `translateX(-${currentSlide * 100}vw)`}}>
                 <img src={data[0]}/>
-                <img src={data[1]}/>
-                <img src={data[2]}/>
+                <img className="combine-image"src={data[1]}/>
+                <img className="combine-image"src={data[2]}/>
+                <img src={data[3]}/>
             </div>
             <div className='icons'>
                 <div className='icon' onClick={prevSlides}>

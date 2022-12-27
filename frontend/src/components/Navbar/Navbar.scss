@@ -3,15 +3,15 @@
     position: sticky;
     top: 0;
     z-index: 999;
-    background-color: white;
 
     .wrapper {
-        padding: 20px;
+        padding: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: white;
 
-        .item {
+        .navbarItem {
             display: flex;
             align-items: center;
         }
@@ -23,18 +23,39 @@
         }
 
         .center {
-
+            display: flex;
         }
 
         .right {
             display: flex;
             gap: 25px;
             align-items: center;
+
+
             .icons {
                 display: flex;
+                align-items: center;
                 gap: 15px;
                 color: #777;
                 cursor: pointer;
+                .search-bar {
+                    display: flex;
+                    align-items: center;
+                    border: 1px solid grey;
+                    padding: 10px 10px;
+
+                    button {
+                        border: none;
+                        background-color: transparent;
+                        color: #777;
+                    }
+
+                    input {
+                        border: none;
+                        background-color: transparent;
+                        
+                    }
+                }
                 .cartIcon {
                     position: relative;
                     span {

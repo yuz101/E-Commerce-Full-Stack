@@ -1,10 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { Link, useLocation } from 'react-router-dom'
 import "./Card.scss"
 
 const Card = ({item}) => {
   return (
-    <Link className='link' to={`/product/${item.id}`}>
+    <Link className='link' to={`/product/${item._id}`}>
         <div className='card'>
             <div className='images'>
                 {item.isNew && <span>New Season</span>}
@@ -13,7 +15,7 @@ const Card = ({item}) => {
             </div>
             <p className='title'>{item.title}</p>
             <div className='prices'>
-                <p>${item.oldPrice}</p>
+                {item.oldPrice && <p className='old-price'>${item.oldPrice}</p> }
                 <p>${item.price}</p>
             </div>
         </div>

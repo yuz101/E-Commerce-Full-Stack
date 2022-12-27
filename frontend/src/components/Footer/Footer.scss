@@ -5,13 +5,13 @@
         align-items: flex-start;
         gap: 50px;
 
-        .category {
+        .column {
             flex: 1;
             display: flex;
             flex-direction: column;
             font-size:  18px;
 
-            .item {
+            .footerItem {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
